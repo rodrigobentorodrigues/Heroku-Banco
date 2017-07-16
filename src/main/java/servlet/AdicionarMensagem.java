@@ -17,6 +17,12 @@ public class AdicionarMensagem extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+        
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nome = req.getParameter("nome");
         String mensagem = req.getParameter("mensagem");
         Chat c = new Chat(nome, mensagem);
