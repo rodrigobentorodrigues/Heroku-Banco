@@ -1,4 +1,3 @@
-
 package Fabricas;
 
 import java.net.URI;
@@ -18,5 +17,10 @@ public class ConFactory {
 
         return DriverManager.getConnection(dbUrl, username, password);
     }
-    
+
+    public static Connection getConnection2() throws URISyntaxException, SQLException {
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        return DriverManager.getConnection(dbUrl);
+    }
+
 }

@@ -14,7 +14,7 @@ public class ChatDao implements CRUD{
     
     public ChatDao(){
         try {
-            this.con = ConFactory.getConnection();
+            this.con = ConFactory.getConnection2();
         } catch (URISyntaxException ex) {
             ex.printStackTrace();
         } catch (SQLException ex) {
