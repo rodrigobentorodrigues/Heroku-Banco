@@ -27,9 +27,9 @@ public class ChatDao implements CRUD{
         int retorno = 0;
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
-            retorno = stmt.executeUpdate();
+            stmt.executeUpdate();
             stmt.close();
-            return retorno > 0;
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;

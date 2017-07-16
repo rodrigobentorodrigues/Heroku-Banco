@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 public class CriarTabela extends HttpServlet{
 
     
-    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletOutputStream out = resp.getOutputStream();
@@ -26,7 +25,6 @@ public class CriarTabela extends HttpServlet{
         } else {
             out.write("Teste com Postgres Heroku - Falhado".getBytes());
         }
-        out.write("Teste com Postgres Heroku".getBytes());
         out.flush();
         out.close();
     }
