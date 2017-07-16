@@ -1,10 +1,13 @@
 
 package Interfaces;
 
+import Entidades.Chat;
+import java.util.List;
+
 public interface CRUD {
     
     boolean criarTabela();
-    void adicionarMensagem(String nome, String mensagem);
-    void removerMensagem(String nome, String mensagem);
+    void adicionarMensagem(Chat c);
+    List<Chat> listarTodos();
     
 }

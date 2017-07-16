@@ -1,6 +1,8 @@
 servlet/NewClass.class
 servlet/CriarTabela.class
+servlet/AdicionarMensagem.class
 launcher/Main.class
 Fabricas/ConFactory.class
 Interfaces/CRUD.class
 Dao/ChatDao.class
+Entidades/Chat.class
