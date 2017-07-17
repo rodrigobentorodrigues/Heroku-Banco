@@ -11,19 +11,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
+import org.json.JSONObject;
 
 @WebServlet(name="AdicionarMensagem", urlPatterns = {"/add"})
 public class AdicionarMensagem extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String nome = req.getParameter("nome");
-        String mensagem = req.getParameter("mensagem");
-        Chat c = new Chat(nome, mensagem);
-        CRUD d = new ChatDao();
-        d.adicionarMensagem(c);
+//        String nome = req.getParameter("nome");
+//        String mensagem = req.getParameter("mensagem");
+//        Chat c = new Chat(nome, mensagem);
+//        CRUD d = new ChatDao();
+//        d.adicionarMensagem(c);
+//        ServletOutputStream out = resp.getOutputStream();
+//        out.write("Adicionado".getBytes());
+//        out.flush();
+//        out.close();
+        resp.setContentType("application/json");
+        JSONObject objetoJSON = new JSONObject();
+        objetoJSON.put("nome", "Rodrigo");
+        objetoJSON.put("curso", "ADS");
         ServletOutputStream out = resp.getOutputStream();
-        out.write("Adicionado".getBytes());
+        out.write(objetoJSON.toString().getBytes());
         out.flush();
         out.close();
     }  
