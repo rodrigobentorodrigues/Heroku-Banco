@@ -5,6 +5,7 @@ import Dao.ChatDao;
 import Entidades.Chat;
 import Interfaces.CRUD;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -32,10 +33,14 @@ public class AdicionarMensagem extends HttpServlet{
         JSONObject objetoJSON = new JSONObject();
         objetoJSON.put("nome", "Rodrigo");
         objetoJSON.put("curso", "ADS");
-        ServletOutputStream out = resp.getOutputStream();
-        out.write(objetoJSON.toString().getBytes());
-        out.flush();
-        out.close();
+        PrintWriter p = resp.getWriter();
+        p.write(objetoJSON.toString());
+        p.flush();
+        p.close();
+//        ServletOutputStream out = resp.getOutputStream();
+//        out.write(objetoJSON.toString().getBytes());
+//        out.flush();
+//        out.close();
     }  
     
 }
