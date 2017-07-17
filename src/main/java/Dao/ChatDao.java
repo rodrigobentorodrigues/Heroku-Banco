@@ -20,7 +20,7 @@ public class ChatDao implements CRUD{
     
     public ChatDao(){
         try {
-            this.con = ConFactory.getConnection2();
+            this.con = ConFactory.getConnection();
         } catch (URISyntaxException ex) {
             ex.printStackTrace();
         } catch (SQLException ex) {
@@ -29,8 +29,8 @@ public class ChatDao implements CRUD{
     }
     
     public boolean criarTabela() {
-        String sql = "CREATE TABLE chat (id serial primary key, nome text, mensagem text);";
-        int retorno = 0;
+        String sql = "CREATE TABLE chat (id serial primary key, nome text, "
+                + "mensagem text, verificador boolean);";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.executeUpdate();
@@ -43,11 +43,12 @@ public class ChatDao implements CRUD{
     }
 
     public void adicionarMensagem(Chat c) {
-        String sql = "INSERT INTO chat (nome, mensagem) VALUES (?, ?)";
+        String sql = "INSERT INTO chat (nome, mensagem, verificador) VALUES (?, ?)";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getMensagem());
+            stmt.setBoolean(3, c.isVerificador());
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException ex) {
@@ -66,6 +67,7 @@ public class ChatDao implements CRUD{
                 Chat c = new Chat();
                 c.setNome(rs.getString("nome"));
                 c.setMensagem(rs.getString("mensagem"));
+                c.setVerificador(rs.getBoolean("verificador"));
                 auxiliar.add(c);
             }
             stmt.close();

@@ -35,8 +35,6 @@ public class AdicionarMensagem extends HttpServlet{
         CRUD crud = new ChatDao();
         List<Chat> lista = crud.listarTodos();
         objetoJSON.put("chat", lista);
-//        objetoJSON.put("nome", "Rodrigo");
-//        objetoJSON.put("curso", "ADS");
         PrintWriter p = resp.getWriter();
         p.write(objetoJSON.toString());
         p.flush();

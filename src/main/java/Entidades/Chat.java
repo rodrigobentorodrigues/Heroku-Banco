@@ -1,14 +1,18 @@
 
 package Entidades;
 
-public class Chat {
+import java.io.Serializable;
+
+public class Chat implements Serializable{
     
     private String nome;
     private String mensagem;
+    private boolean verificador;
     
-    public Chat(String nome, String msg){
+    public Chat(String nome, String msg, boolean vrf){
         this.nome = nome;
         this.mensagem = msg;
+        this.verificador = vrf;
     }
     
     public Chat(){};
@@ -29,16 +33,20 @@ public class Chat {
         this.mensagem = mensagem;
     }
 
-    @Override
-    public String toString() {
-        return "Chat{" + "nome=" + nome + ", mensagem=" + mensagem + '}';
+    public boolean isVerificador() {
+        return verificador;
+    }
+
+    public void setVerificador(boolean verificador) {
+        this.verificador = verificador;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + (this.nome != null ? this.nome.hashCode() : 0);
-        hash = 37 * hash + (this.mensagem != null ? this.mensagem.hashCode() : 0);
+        int hash = 3;
+        hash = 59 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        hash = 59 * hash + (this.mensagem != null ? this.mensagem.hashCode() : 0);
+        hash = 59 * hash + (this.verificador ? 1 : 0);
         return hash;
     }
 
@@ -54,6 +62,9 @@ public class Chat {
             return false;
         }
         final Chat other = (Chat) obj;
+        if (this.verificador != other.verificador) {
+            return false;
+        }
         if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
             return false;
         }
@@ -62,8 +73,11 @@ public class Chat {
         }
         return true;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Chat{" + "nome=" + nome + ", mensagem=" + mensagem + ", verificador=" + verificador + '}';
+    }
     
 }
 
