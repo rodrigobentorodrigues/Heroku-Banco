@@ -57,10 +57,11 @@ public class ChatDao implements CRUD{
 
     public List<Chat> listarTodos(){
         String sql = "SELECT * FROM chat";
-        List<Chat> auxiliar = new ArrayList<Chat>();
+        List<Chat> auxiliar = null;
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
+            auxiliar = new ArrayList<Chat>();
             while (rs.next()){
                 Chat c = new Chat();
                 c.setNome(rs.getString("nome"));
