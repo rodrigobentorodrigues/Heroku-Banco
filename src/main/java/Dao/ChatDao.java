@@ -42,7 +42,7 @@ public class ChatDao implements CRUD {
     }
 
     public void adicionarMensagem(Chat c) {
-        String sql = "INSERT INTO chat (nome, mensagem, verificador) VALUES (?, ?)";
+        String sql = "INSERT INTO chat (nome, mensagem, verificador) VALUES (?, ?, ?)";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, c.getNome());
