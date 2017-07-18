@@ -1,4 +1,3 @@
-
 package Dao;
 
 import Entidades.Chat;
@@ -11,14 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class ChatDao implements CRUD{
+public class ChatDao implements CRUD {
 
     private Connection con;
-    
-    public ChatDao(){
+
+    public ChatDao() {
         try {
             this.con = ConFactory.getConnection();
         } catch (URISyntaxException ex) {
@@ -27,7 +24,7 @@ public class ChatDao implements CRUD{
             ex.printStackTrace();
         }
     }
-    
+
     public boolean criarTabela() {
         String sql = "CREATE TABLE chat (id serial primary key, nome text, "
                 + "mensagem text, verificador boolean);";
@@ -35,11 +32,13 @@ public class ChatDao implements CRUD{
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.executeUpdate();
             stmt.close();
+            this.con.close();
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return false;
         }
+
+        return false;
     }
 
     public void adicionarMensagem(Chat c) {
@@ -51,19 +50,20 @@ public class ChatDao implements CRUD{
             stmt.setBoolean(3, c.isVerificador());
             stmt.executeUpdate();
             stmt.close();
+            this.con.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    public List<Chat> listarTodos(){
-        String sql = "SELECT * FROM chat";
+    public List<Chat> listarTodos() {
         List<Chat> auxiliar = null;
+        String sql = "SELECT * FROM chat";
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             auxiliar = new ArrayList<Chat>();
-            while (rs.next()){
+            while (rs.next()) {
                 Chat c = new Chat();
                 c.setNome(rs.getString("nome"));
                 c.setMensagem(rs.getString("mensagem"));
@@ -71,11 +71,12 @@ public class ChatDao implements CRUD{
                 auxiliar.add(c);
             }
             stmt.close();
+            this.con.close();
             return auxiliar;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return auxiliar;
         }
+        return auxiliar;
     }
-    
+
 }
